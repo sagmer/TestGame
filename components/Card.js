@@ -7,15 +7,17 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const Card=(props)=>{
     const contentType=props.contentType;
     const [chosen, setChosen]=useState(false);
-    const choiceEventHandler=props=>{
+    chosenHandler=props.chosenHandler;
+    const choiceEventHandler=key=>{
         if(chosen)
             setChosen(false)
         else
             setChosen(true)
+        chosenHandler(key)
     }
     let content;
     let radioBut;
-    if(chosen===false)
+    if(props.chosen===false)
         radioBut=<Text><MaterialCommunityIcons name="checkbox-blank-circle-outline" size={24} color="black"/></Text>
     else
         radioBut=<Text><MaterialCommunityIcons name="circle" size={24} color="black"/></Text>
@@ -39,9 +41,10 @@ const Card=(props)=>{
       </View>       
     }
     else{ 
+        //console.log(props.key)
         content=
          <View style={styles.questionPart}>
-                    <TouchableOpacity onPress={choiceEventHandler}>
+                    <TouchableOpacity onPress={()=>choiceEventHandler(props.ind)}>
             {radioBut}
         </TouchableOpacity>
             <Text style={styles.text}>{props.content}</Text>
