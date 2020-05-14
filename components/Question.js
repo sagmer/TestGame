@@ -5,19 +5,15 @@ import Card from "./Card";
 import { Video, Audio } from "expo-av";
 
 const Question = props => {
-    //const [chosenIndex, setChosenIndex] = useState(props.chosenIndex);//
-    const [choices, setChoices]= useState(props.choices);//
-   
-    chosenHandler = key=>{
-         console.log("key"+key)
-        let curChoices=[...choices];
-        //console.log(curChoices);
+    const [choices, setChoices] = useState(props.choices);
+    chosenHandler = key => {
+        console.log("key" + key)
+        let curChoices = [...choices];
         curChoices.forEach(
-            (cur, index)=>{
-                cur.chosen=false;   
+            (curItem) => {
+                curItem.chosen = false;
             });
-        curChoices[key].chosen=true;
-        //console.log(curChoices);
+        curChoices[key].chosen = true;
         setChoices(curChoices);
     }
     const questionUri = props.question.uri;
@@ -38,7 +34,7 @@ const Question = props => {
                         style={{ width: 300, height: 200 }}
                     />
                 </View>
-                <View style={styles.questionPart}>                
+                <View style={styles.questionPart}>
                     <Text style={styles.questionText}> {props.question.text}</Text>
                 </View>
             </View>
@@ -49,12 +45,12 @@ const Question = props => {
             <Text style={styles.questionText}> {props.question.text}</Text>
         </View>
     }
-     
+
     return (
         <View style={styles.container}>
             {questionPart}
-            {choices.map((item, index) =>          
-                <Card ind={index} content={item.label} contentType={item.contentType} chosen= {item.chosen} chosenHandler={chosenHandler}></Card>
+            {choices.map((item, index) =>
+                <Card key={index} ind={index} content={item.label} contentType={item.contentType} chosen={item.chosen} chosenHandler={chosenHandler}></Card>
             )}
         </View>
     );
@@ -66,22 +62,24 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "80%",
         marginVertical: 20,
-        alignItems:"center"
+        alignItems: "center"
     },
     question: {
         flexDirection: "column",
-        width: "80%",
+        width: "100%",
         marginVertical: 20,
-        borderColor:"gray",
-        borderRadius:10,
-        borderWidth:1,
-        alignItems:"center"
+        borderColor: "gray",
+        borderRadius: 10,
+        borderWidth: 1,
+        alignItems: "center"
     },
-    questionNum:{
-        color:"red",
-        fontSize:18,
-        width:"100%",
-        alignItems:"center"
+    questionNum: {
+        color: "#ffffff",
+        fontSize: 18,
+        width: "100%",
+        alignItems: "center",
+        fontWeight: 'bold',
+        fontFamily: 'AvenirNext-DemiBold',
 
     },
     questionText: {
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         borderWidth: 2,
         padding: 20,
-        backgroundColor:"#ffd700"
+        backgroundColor: "#800000"
     }
 })
 export default Question;
